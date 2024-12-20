@@ -1,0 +1,20 @@
+# 忽略金鑰檔案
+credentials/
+*.json
+
+# 忽略編譯輸出目錄
+target/
+bin/
+
+# 忽略 IDE 設定檔
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# 忽略操作系統產生的檔案
+.DS_Store
+Thumbs.db
+
+# 忽略日誌檔案
+*.log
