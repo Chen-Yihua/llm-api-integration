@@ -1,29 +1,5 @@
 # OpenAI & Gemini API Integration  
 -----------------------------------
-## Project Structure 
-llm-api-intergration/  
-├── .vscode/  
-│   └── settings.json  
-├── demo/  
-│   ├── credentials/          # 存放 API 認證檔案  
-│   │   └── gen-lang-client-*.json  
-│   ├── resources/  
-│   │   ├── config.json       # 設定檔  
-│   │   └── logback.xml       # 日誌配置  
-│   ├── src/  
-│   │   ├── main/  
-│   │   │   ├── java/         # 主程式碼  
-│   │   │   └── resources/    # 資源檔案  
-│   └── test/  
-│       ├── java/             # 測試程式碼  
-│       │   ├── ChatGPTClientTest.java  
-│       │   ├── GeminiClientTest.java  
-│       │   └── GoogleCredentialsConnectTest.java  
-├── target/                    # 編譯輸出目錄  
-├── .gitignore                 # 忽略的檔案清單  
-├── pom.xml                    # Maven 配置檔案  
-└── README.md                  # 本文件  
-
 ## Requirements  
 1. JDK: 23 或更新版本
 2. Maven: 3.9.9 或更新版本
