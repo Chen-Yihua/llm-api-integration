@@ -36,7 +36,7 @@ llm-api-intergration/
 將專案複製到本地端：  
 ```git clone https://github.com/Chen-Yihua/llm-api-integration.git```
 ```cd llm-api-integration```
-
+  
 **步驟 2：設定環境**  
 在 demo 資料夾中新增一個 credentials 資料夾，並放入所需的 API 金鑰檔案。  
 確保 src/main/resources/config.json 的內容包含正確的 API 金鑰，例如：  
@@ -46,10 +46,10 @@ llm-api-intergration/
   "GEMINI_API_KEY": "AI-xxxxxx"  
 }
 ```
-
+  
 **步驟 3：建置與執行**   
 使用 Maven 安裝專案依賴：    
-‵‵‵mvn clean install‵‵‵
-
+```mvn clean install```
+  
 **步驟 4 : 運行主程式**  
 使用 IDE 或命令列運行主程式，例如 ChatGPTClientTest.java 或 GeminiClientTest.java  
