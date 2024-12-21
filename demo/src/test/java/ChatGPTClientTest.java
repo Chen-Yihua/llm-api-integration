@@ -1,19 +1,39 @@
+import java.io.FileReader;
+import java.io.IOException;
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
 import com.openai.core.http.StreamResponse;
-// import com.openai.core.http.StreamResponse;
-// import com.openai.models.ChatCompletion;
 import com.openai.models.ChatCompletionChunk;
-// import com.openai.models.ChatCompletionChunk;
 import com.openai.models.ChatCompletionCreateParams;
 import com.openai.models.ChatCompletionMessageParam;
 import com.openai.models.ChatCompletionUserMessageParam;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class ChatGPTClientTest {
     public static void main(String[] args){
+        String apiKey = null;
+        
+        try {
+            // 讀取 config.json 文件的相對路徑
+            String configFilePath = "demo/src/main/resources/config.json"; 
+            FileReader reader = new FileReader(configFilePath);
+
+            // 使用 Gson 解析 JSON 文件
+            JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
+            apiKey = jsonObject.get("OPENAI_API_KEY").getAsString();
+
+            if (apiKey == null || apiKey.isEmpty()) {
+                throw new IllegalStateException("API Key is missing in config.json");
+            }
+        } catch (IOException e) {
+            System.err.println("Failed to read config.json file: " + e.getMessage());
+        }
+
         // 初始化 OpenAI 客戶端
         OpenAIClient client = OpenAIOkHttpClient.builder()
-        .build();
+            .apiKey(apiKey)
+            .build();
 
         // 建立 Chat Completion 請求參數
         ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
