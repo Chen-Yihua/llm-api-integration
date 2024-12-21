@@ -23,9 +23,13 @@
 }
 ```
   
-**步驟 3：建置與執行**   
+**步驟 3：建置與執行**  
 使用 Maven 安裝專案依賴：    
-```mvn clean install```
+```mvn clean install```  
+  
+在 IDE 中重新載入專案：  
+VSCode：在專案目錄中找到 pom.xml 文件> 右鍵選擇 Reload Project  
+IntelliJ IDEA：點擊 Maven 工具窗口的 Reload All Maven Projects  
   
 **步驟 4 : 運行主程式**  
 使用 IDE 或命令列運行主程式，例如 ChatGPTClientTest.java 或 GeminiClientTest.java  
