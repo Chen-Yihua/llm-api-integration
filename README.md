@@ -10,7 +10,7 @@
 ## Usage
 **步驟 1：複製專案**  
 將專案複製到本地端：  
-```git clone https://github.com/Chen-Yihua/llm-api-integration.git```
+```git clone https://github.com/Chen-Yihua/llm-api-integration.git```  
 ```cd llm-api-integration```
   
 **步驟 2：設定環境**  
