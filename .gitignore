@@ -1,6 +1,9 @@
-# 忽略金鑰檔案
-credentials/
-*.json
+# 忽略敏感檔案
+demo/credentials/
+src/main/resources/config.json
+
+# 忽略 VSCode 設定
+.vscode/
 
 # 忽略編譯輸出目錄
 target/
