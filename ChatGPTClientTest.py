@@ -2,7 +2,7 @@ import os
 import time
 import json
 from openai import OpenAI
-from sklearn.metrics import confusion_matrix # , ConfusionMatrixDisplay
+# from sklearn.metrics import confusion_matrix # , ConfusionMatrixDisplay
 
 # 從 config.json 讀取 API Key
 current_dir = os.path.dirname(os.path.abspath(__file__))  # 取得目前檔案所在目錄
