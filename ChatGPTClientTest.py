@@ -102,8 +102,6 @@ from openai import OpenAI
 from sklearn.metrics import confusion_matrix # , ConfusionMatrixDisplay
 
 
-
-
 # 從 config.json 讀取 API Key
 current_dir = os.path.dirname(os.path.abspath(__file__))  # 取得目前檔案所在目錄
 config_path = os.path.join(current_dir, "demo", "src", "main", "resources", "config.json") # 構建相對路徑
@@ -187,7 +185,7 @@ print(f"Query Time: {end_time - start_time:.2f} seconds")
 # TNR = TN / (TN + FP) if (TN + FP) > 0 else 0  # True Negative Rate
 # FNR = FN / (FN + TP) if (FN + TP) > 0 else 0  # False Negative Rate
 
-# 提取花費信息（假設 OpenAI API 返回相應字段）
+# 提取花費信息
 # cost_info = chat_completion.get("usage", {})
 # tokens_used = cost_info.get("total_tokens", "N/A")
 
