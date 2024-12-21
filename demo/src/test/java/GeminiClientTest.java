@@ -1,13 +1,12 @@
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
-// import com.google.cloud.vertexai.api.PredictionServiceClient;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import com.google.cloud.vertexai.generativeai.ResponseHandler;
-
 import java.io.FileInputStream;
-// import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.io.File;
 
 public class GeminiClientTest {
@@ -45,14 +44,18 @@ public class GeminiClientTest {
 
     public static String textInput(
         String projectId, String location, String modelName, String textPrompt) throws IOException {
-        // 服務帳戶金鑰檔案路徑
-        String keyFilePath = "C:\\Users\\evach\\Documents\\research plan\\openAI_test\\demo\\credentials\\gen-lang-client-0612946846-d93ef93d6f82.json"; // 金鑰檔案路徑
+        
+        // 使用相對路徑定位金鑰檔案
+        Path keyFilePath = Paths.get("demo", "credentials", "gen-lang-client-0612946846-51676805a977.json");
+        // 將相對路徑轉為絕對路徑
+        String absolutePath = keyFilePath.toAbsolutePath().toString();
         // 建立 GoogleCredentials 並設定範圍
         GoogleCredentials credentials = GoogleCredentials
-            .fromStream(new FileInputStream(keyFilePath))
-            .createScoped("https://www.googleapis.com/auth/cloud-platform");
+            .fromStream(new FileInputStream(absolutePath))
+         .createScoped("https://www.googleapis.com/auth/cloud-platform");
+        
         // 驗證金鑰檔案是否存在
-        File keyFile = new File(keyFilePath);
+        File keyFile = new File(absolutePath);
         if (keyFile.exists()) {
             System.out.println("檔案存在，路徑正確！");
         } else {
