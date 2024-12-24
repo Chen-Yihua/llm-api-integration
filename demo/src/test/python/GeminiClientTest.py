@@ -7,7 +7,8 @@ import google.generativeai as genai
 
 # 從 config.json 讀取 API Key
 current_dir = os.path.dirname(os.path.abspath(__file__))  # 取得目前檔案所在目錄
-config_path = os.path.join(current_dir, "demo", "src", "main", "resources", "config.json") # 構建相對路徑
+project_path = os.path.dirname(current_dir) # 取得專案根目錄的路徑
+config_path = os.path.join(project_path, "main", "resources", "config.json") # 構建相對路徑
 
 with open(config_path, "r") as file:
     config = json.load(file)
