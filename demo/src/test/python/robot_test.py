@@ -5,7 +5,7 @@ import create_test_dataset
 from aalpy.learning_algs import (
         run_Lstar, run_KV, run_non_det_Lstar,
         run_stochastic_Lstar, run_abstracted_ONFSM_Lstar, run_Alergia,
-        run_JAlergia, run_active_Alergia, run_RPNI, run_PAPNI, run_active_RPNI 
+        run_JAlergia, run_active_Alergia, run_RPNI, run_active_RPNI 
     )
 
 def robot_test():
@@ -39,7 +39,6 @@ def robot_test():
         "JAlergia": run_JAlergia,
         "active_Alergia": run_active_Alergia,
         "RPNI": run_RPNI,
-        "PAPNI": run_PAPNI,
         "active_RPNI": run_active_RPNI
     }
 

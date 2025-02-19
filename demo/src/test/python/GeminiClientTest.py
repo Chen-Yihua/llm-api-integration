@@ -5,22 +5,39 @@ import google.generativeai as genai
 # from vertexai.generative_models import GenerativeModel
 # from google.oauth2 import service_account
 
-# 從 config.json 讀取 API Key
-current_dir = os.path.dirname(os.path.abspath(__file__))  # 取得目前檔案所在目錄
-project_path = os.path.dirname(current_dir) # 取得專案根目錄的路徑
-config_path = os.path.join(project_path, "main", "resources", "config.json") # 構建相對路徑
+def get_API(model_name):
+    # 從 config.json 讀取 API Key
+    current_working_directory = os.getcwd() 
+    config_path = os.path.join(current_working_directory, "demo", "src", "main", "resources", "config.json") # 構建相對路徑
 
-with open(config_path, "r") as file:
-    config = json.load(file)
-api_key = config.get("GEMINI_API_KEY")
-if not api_key:
-    raise ValueError("Error: API Key not found in config.json")
+    with open(config_path, "r") as file:
+        config = json.load(file)
+    api_key = config.get("GEMINI_API_KEY")
+    if not api_key:
+        raise ValueError("Error: API Key not found in config.json")
 
-genai.configure(api_key = api_key) # 初始化客戶端
-model = genai.GenerativeModel("gemini-1.5-pro")
+    genai.configure(api_key = api_key) # 初始化客戶端
+    model = genai.GenerativeModel(model_name)
+    return model
 
-start_time = time.time()
-response = model.generate_content(
+def execute_query(model_name, prompt, max_output_tokens, temperature):
+    model = get_API(model_name)
+    start_time = time.time()
+    response = model.generate_content(
+        prompt,
+        generation_config = genai.GenerationConfig(
+            max_output_tokens = max_output_tokens,
+            temperature = temperature
+        )
+    )
+    end_time = time.time()
+    print(f"Query Time: {end_time - start_time:.2f} seconds")
+    print("Total Tokens:", response.usage_metadata.total_token_count)
+    return response.text
+
+
+def main():
+    prompt = (
     "Stock Trading Rules:"
     "1. Today's price : The last number in each sequence represents today's price. Today's price is excluded from determining whether a value is a peak or trough."
     "2. Peak : It is the local maximum in the sequence before today, meaning it is greater than its immediate left and right neighbors at a specific position and appears only once at that position."
@@ -42,9 +59,9 @@ response = model.generate_content(
     "Q8. 2, 1, 3, 5, 4, 2"
     "Q9. 2, 2, 2, 3, 2, 1"
     "Q10. 1.2, 1.0, 1.3, 0.5"
-    "Q11. 1.2, 1, 1.3, 0.5"
-)
-end_time = time.time()
-print(response.text)
-print(f"Query Time: {end_time - start_time:.2f} seconds")
+    "Q11. 1.2, 1, 1.3, 0.5")
+    result = execute_query("gemini-1.5-pro", prompt, 1000, 0.1)
+    print(result)
 
+if __name__ == "__main__":
+    main()

@@ -6,9 +6,8 @@ from typing import List
 
 # 從 config.json 讀取 API Key
 def get_API():
-    current_dir = os.path.dirname(os.path.abspath(__file__))  # 取得目前檔案所在目錄
-    project_path = os.path.dirname(current_dir) # 取得專案根目錄的路徑
-    config_path = os.path.join(project_path, "main", "resources", "config.json") # 構建相對路徑
+    current_working_directory = os.getcwd() 
+    config_path = os.path.join(current_working_directory, "demo", "src", "main", "resources", "config.json") # 構建相對路徑
 
     with open(config_path, "r") as file:
         config = json.load(file)
@@ -24,13 +23,13 @@ def get_query(content):
     }
     return message
 
-def execute_query(content, model):
+def execute_query(content, model, max_completion_tokens, temperature):
     api_key = get_API()
     # 初始化 OpenAI 客戶端
     client = OpenAI(
         api_key = api_key
     )
-    
+    # print("content",content)
     # 查詢模型
     start_time = time.time()
     chat_completion = client.chat.completions.create(
@@ -38,25 +37,27 @@ def execute_query(content, model):
             get_query(content)
         ],
         model = model,
+        max_completion_tokens = max_completion_tokens,
+        temperature = temperature
     )
     end_time = time.time()
     execute_time = end_time - start_time
 
-    completion_tokens = chat_completion.usage.completion_tokens
-    prompt_tokens = chat_completion.usage.prompt_tokens
+    # completion_tokens = chat_completion.usage.completion_tokens
+    # prompt_tokens = chat_completion.usage.prompt_tokens
     total_tokens = chat_completion.usage.total_tokens
 
-    print("completion_tokens", completion_tokens)
-    print("prompt_tokens", prompt_tokens)
-    print("total_tokens", total_tokens)
-    print(f"Query Time: {execute_time:.2f} seconds")
+    # print("completion_tokens", completion_tokens)
+    # print("prompt_tokens", prompt_tokens)
+    # print("total_tokens", total_tokens)
+    # print(f"Query Time: {execute_time:.2f} seconds")
 
     return chat_completion.choices[0].message.content
 
 def main():
     content = "say this is a test"
-    model = "o1-mini"
-    response = execute_query(content, model)
+    model = "gpt-4-turbo-preview"
+    response = execute_query(content, model, 1000, 0.1)
     print(response)
 
 
